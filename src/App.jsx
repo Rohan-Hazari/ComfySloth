@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import Home from "./Pages/Home";
-import Products from "./Pages/Products";
-import Error from "./Pages/Error";
-import SingleProduct from "./Pages/SingleProduct";
-import Cart from "./Pages/Cart";
+import Home from "./Pages/HomePage";
+import Products from "./Pages/ProductsPage";
+import Error from "./Pages/ErrorPage";
+import SingleProduct from "./Pages/SingleProductPage";
+import Cart from "./Pages/CartPage";
 import Navbar from "./Components/Navbar";
 import Footer from "./Components/Footer";
 
