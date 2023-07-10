@@ -12,9 +12,10 @@ const Contact = () => {
             quam rerum maiores ex vitae temporibus ratione alias ut
             exercitationem cupiditate?
           </p>
-          <form className="contact-form">
+          <form action="https://formspree.io/f/meqbqzbj" method="POST" className="contact-form">
             <input
               type="email"
+              name="email"
               className="form-input"
               placeholder="Enter email...."
             />
