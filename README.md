@@ -1,9 +1,21 @@
-This is an E-Commerce website I made with React and [Styled components](https://styled-components.com/)
+This is an E-Commerce website I made with React, React router 6 and [Styled components](https://styled-components.com/)
 
-Used [Auth0](https://auth0.com/docs/quickstart/spa/react/interactive) for authentication and [Stripe API](https://stripe.com/docs/checkout/quickstart?lang=node&client=react) for payment 
+### Features :
 
+* Featured products on the Homepage and a functional newsletter form    
+* The user can view products in Grid and List mode
+* Sort the products according to their price and alphabetical order
+* Apply various different filter according to their need
+* View each product separately on Single page with more details
+* Add products to cart (saved to local Storage)
+* Login and Logout option
+* Checkout the items in your cart (dummy card number provided)
 
-# Getting Started with Create React App
+Used [Auth0](https://auth0.com/docs/quickstart/spa/react/interactive) for authentication, [Stripe API](https://stripe.com/docs/checkout/quickstart?lang=node&client=react) for payment , [Formspree](https://formspree.io) for the newsletter and useContext and useReducer Hook for state management
+
+Used a [netlify function](https://docs.netlify.com/functions/overview/) written in node.js to handle stripe API requests and response
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
