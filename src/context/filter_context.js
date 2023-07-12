@@ -9,6 +9,8 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
+  PRODUCT_PAGINATION,
+  UPDATE_PAGE,
 } from "../actions";
 import { useProductsContext } from "./products_context";
 
@@ -27,6 +29,12 @@ const initialState = {
     price: 0,
     shipping: false,
   },
+  //pagination
+  paginated_products: [],
+  page_number: 1,
+  max_page_number: 0,
+  products_per_page: 9,
+  first_on_page: 0,
 };
 
 const FilterContext = React.createContext();
@@ -42,7 +50,9 @@ export const FilterProvider = ({ children }) => {
   useEffect(() => {
     dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
-  }, [products, state.sort, state.filters]);
+    dispatch({ type: PRODUCT_PAGINATION });
+  }, [products, state.sort, state.filters, state.page_number, state.grid_view]);
+  //grid view is being passed to display different amount of products on different views
 
   const setGridView = () => {
     dispatch({ type: SET_GRIDVIEW });
@@ -80,6 +90,13 @@ export const FilterProvider = ({ children }) => {
   const clearFilters = () => {
     dispatch({ type: CLEAR_FILTERS });
   };
+
+  const updatePage = (e) => {
+    const page = e.target.dataset.page;
+    // console.log(page);
+    dispatch({ type: UPDATE_PAGE, payload: page });
+  };
+
   return (
     <FilterContext.Provider
       value={{
@@ -89,6 +106,7 @@ export const FilterProvider = ({ children }) => {
         updateSort,
         updateFilters,
         clearFilters,
+        updatePage,
       }}
     >
       {children}

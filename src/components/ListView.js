@@ -2,6 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { formatPrice } from "../utils/helpers";
 import { Link } from "react-router-dom";
+import { Pagination } from "./index";
 const ListView = ({ products }) => {
   return (
     <Wrapper>
@@ -21,6 +22,7 @@ const ListView = ({ products }) => {
           </article>
         );
       })}
+      <Pagination />
     </Wrapper>
   );
 };

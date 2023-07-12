@@ -17,6 +17,7 @@ import Stars from "./Stars";
 import CartContent from "./CartContent";
 import PageHero from "./PageHero";
 import StripeCheckout from "./StripeCheckout";
+import Pagination from "./Pagination";
 export {
   FeaturedProducts,
   Navbar,
@@ -36,5 +37,6 @@ export {
   Stars,
   CartContent,
   PageHero,
+  Pagination,
   StripeCheckout,
 };

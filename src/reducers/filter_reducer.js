@@ -7,6 +7,8 @@ import {
   UPDATE_FILTERS,
   FILTER_PRODUCTS,
   CLEAR_FILTERS,
+  PRODUCT_PAGINATION,
+  UPDATE_PAGE,
 } from "../actions";
 
 const filter_reducer = (state, action) => {
@@ -22,10 +24,10 @@ const filter_reducer = (state, action) => {
     };
   }
   if (action.type === SET_GRIDVIEW) {
-    return { ...state, grid_view: true };
+    return { ...state, grid_view: true, products_per_page: 9 };
   }
   if (action.type === SET_LISTVIEW) {
-    return { ...state, grid_view: false };
+    return { ...state, grid_view: false, products_per_page: 6 };
   }
   if (action.type === UPDATE_SORT) {
     return {
@@ -128,6 +130,94 @@ const filter_reducer = (state, action) => {
     };
   }
 
+  if (action.type === PRODUCT_PAGINATION) {
+    const { filtered_products, page_number, products_per_page, first_on_page } =
+      state;
+
+    // calculate the max page number
+    const firstHalfProducts = filtered_products.slice(0, first_on_page);
+    const latterHalfProducts = filtered_products.slice(first_on_page);
+
+    let max_page_number =
+      Math.ceil(firstHalfProducts.length / products_per_page) +
+      Math.ceil(latterHalfProducts.length / products_per_page);
+
+    let newPageNumber =
+      Math.ceil(firstHalfProducts.length / products_per_page) + 1;
+
+    if (max_page_number === 0) {
+      max_page_number = 1; // keep page_number above 0. otherwise when there's no product, page number become 0 and stays at 0
+    }
+    if (page_number > max_page_number) {
+      newPageNumber = max_page_number; // update page_number if there isn't that much pages
+    }
+
+    // show products are belong to current page
+    const paginated_products = filtered_products.slice(
+      first_on_page,
+      first_on_page + products_per_page
+    );
+
+    return {
+      ...state,
+      paginated_products,
+      max_page_number,
+      products_per_page,
+      first_on_page,
+      page_number: newPageNumber,
+    };
+  }
+  // handle actions when clicked on page number and prev/next button
+  // responsible for calculating new page number and new first on page product
+  if (action.type === UPDATE_PAGE) {
+    const {
+      filtered_products,
+      page_number,
+      max_page_number,
+      products_per_page,
+      first_on_page,
+    } = state;
+    let newPageNumber = 0;
+    let newFirstOnPage = 0;
+
+    if (action.payload === "prev") {
+      newPageNumber = page_number - 1;
+      newFirstOnPage = first_on_page - products_per_page;
+      if (newFirstOnPage < 0) {
+        newFirstOnPage = 0;
+      }
+      if (page_number < 1) {
+        newPageNumber = 1;
+      }
+    } else if (action.payload === "next") {
+      newPageNumber = page_number + 1;
+      newFirstOnPage = first_on_page + products_per_page;
+
+      // page may grow
+      if (newFirstOnPage > filtered_products.length - 1) {
+        newFirstOnPage = first_on_page;
+      }
+
+      if (newPageNumber > max_page_number) {
+        newPageNumber = max_page_number;
+      }
+    } else {
+      newPageNumber = Number(action.payload); // page number fetched from dataset property is string
+      let pageDifference = Number(action.payload) - page_number;
+      newFirstOnPage = first_on_page + pageDifference * products_per_page;
+      if (newFirstOnPage < 0) {
+        newFirstOnPage = 0;
+      }
+      if (newFirstOnPage > filtered_products.length - 1) {
+        newFirstOnPage = first_on_page;
+      }
+    }
+    return {
+      ...state,
+      page_number: newPageNumber,
+      first_on_page: newFirstOnPage,
+    };
+  }
   throw new Error(`No Matching "${action.type}" - action type`);
 };
 
