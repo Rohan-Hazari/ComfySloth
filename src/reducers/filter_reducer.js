@@ -9,6 +9,8 @@ import {
   CLEAR_FILTERS,
   PRODUCT_PAGINATION,
   UPDATE_PAGE,
+  FILTER_PAGINATION,
+  RESET_PAGINATION,
 } from "../actions";
 
 const filter_reducer = (state, action) => {
@@ -71,8 +73,9 @@ const filter_reducer = (state, action) => {
   }
 
   if (action.type === FILTER_PRODUCTS) {
-    const { all_products } = state;
+    const { all_products, page_number } = state;
     const { text, category, company, color, price, shipping } = state.filters;
+    // console.log(page_number);
 
     let tempProducts = [...all_products];
 
@@ -112,7 +115,10 @@ const filter_reducer = (state, action) => {
       );
     }
 
-    return { ...state, filtered_products: tempProducts };
+    return {
+      ...state,
+      filtered_products: tempProducts,
+    };
   }
 
   if (action.type === CLEAR_FILTERS) {
@@ -130,6 +136,20 @@ const filter_reducer = (state, action) => {
     };
   }
 
+  if (action.type === RESET_PAGINATION) {
+    return {
+      ...state,
+      page_number: 1,
+      first_on_page: 0,
+    };
+  }
+
+  if (action.type === FILTER_PAGINATION) {
+    console.log("Page number old =" + state.page_number);
+    const updatePageNumber = 1;
+    return { ...state, page_number: updatePageNumber };
+  }
+
   if (action.type === PRODUCT_PAGINATION) {
     const { filtered_products, page_number, products_per_page, first_on_page } =
       state;
@@ -144,6 +164,7 @@ const filter_reducer = (state, action) => {
 
     let newPageNumber =
       Math.ceil(firstHalfProducts.length / products_per_page) + 1;
+    console.log("New page number:" + newPageNumber);
 
     if (max_page_number === 0) {
       max_page_number = 1; // keep page_number above 0. otherwise when there's no product, page number become 0 and stays at 0
@@ -157,6 +178,7 @@ const filter_reducer = (state, action) => {
       first_on_page,
       first_on_page + products_per_page
     );
+    const firstPage = 1;
 
     return {
       ...state,
@@ -165,6 +187,7 @@ const filter_reducer = (state, action) => {
       products_per_page,
       first_on_page,
       page_number: newPageNumber,
+      // page_number: firstPage, Works but keeps the page number as 1 only
     };
   }
   // handle actions when clicked on page number and prev/next button

@@ -11,6 +11,8 @@ import {
   CLEAR_FILTERS,
   PRODUCT_PAGINATION,
   UPDATE_PAGE,
+  RESET_PAGINATION,
+  FILTER_PAGINATION,
 } from "../actions";
 import { useProductsContext } from "./products_context";
 
@@ -47,6 +49,11 @@ export const FilterProvider = ({ children }) => {
     dispatch({ type: LOAD_PRODUCTS, payload: products });
   }, [products]);
 
+  // resets the page to 1 whenever a filter is applied
+  useEffect(() => {
+    dispatch({ type: RESET_PAGINATION });
+  }, [state.filters]);
+
   useEffect(() => {
     dispatch({ type: FILTER_PRODUCTS });
     dispatch({ type: SORT_PRODUCTS });
@@ -64,8 +71,7 @@ export const FilterProvider = ({ children }) => {
   const updateSort = (e) => {
     // const name = e.target.name;
     const value = e.target.value;
-    console.log(products);
-    console.log(value);
+
     dispatch({ type: UPDATE_SORT, payload: value });
   };
 

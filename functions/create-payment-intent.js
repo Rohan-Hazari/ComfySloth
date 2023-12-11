@@ -12,7 +12,7 @@ exports.handler = async function (event, context) {
       //normaly u would get the info like total cost and everything from backend but we are using context
       return shipping_fee + total_amount * 10;
     };
-    console.log(calculateOrderAmount());
+    // console.log(calculateOrderAmount());
 
     try {
       const paymentIntent = await stripe.paymentIntents.create({

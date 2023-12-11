@@ -44,10 +44,10 @@ const Pagination = () => {
 };
 
 const Wrapper = styled.section`
-  margin-top: 2rem;
+  margin: 2rem 0;
   display: flex;
   align-items: center;
-  justify-content: end;
+  justify-content: start;
   flex-wrap: wrap;
   gap: 0.5rem;
   .active {
