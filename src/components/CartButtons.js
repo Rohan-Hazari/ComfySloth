@@ -25,7 +25,7 @@ const CartButtons = () => {
           className="auth-btn"
           onClick={() => {
             clearCart();
-            logout({ returnTo: window.location.origin });
+            logout({ returnTo:"https://comfy-sloth-706e37.netlify.app/"  });
           }}
           type="button"
         >
