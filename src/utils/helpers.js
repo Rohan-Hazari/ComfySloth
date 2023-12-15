@@ -3,7 +3,7 @@ export const formatPrice = (number) => {
     maximumFractionDigits: 2,
     style: "currency",
     currency: "INR",
-  });
+  }).format(number / 10);
   return newNumber;
 };
 
