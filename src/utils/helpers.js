@@ -1,6 +1,6 @@
 export const formatPrice = (number) => {
   const newNumber = new Intl.NumberFormat("en-IN", {
-    maximumFractionDigits: 2,
+    maximumFractionDigits: 0,
     style: "currency",
     currency: "INR",
   }).format(number / 10);

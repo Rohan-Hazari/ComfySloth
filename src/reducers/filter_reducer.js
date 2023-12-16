@@ -145,7 +145,7 @@ const filter_reducer = (state, action) => {
   }
 
   if (action.type === FILTER_PAGINATION) {
-    console.log("Page number old =" + state.page_number);
+    // console.log("Page number old =" + state.page_number);
     const updatePageNumber = 1;
     return { ...state, page_number: updatePageNumber };
   }
@@ -164,7 +164,7 @@ const filter_reducer = (state, action) => {
 
     let newPageNumber =
       Math.ceil(firstHalfProducts.length / products_per_page) + 1;
-    console.log("New page number:" + newPageNumber);
+    // console.log("New page number:" + newPageNumber);
 
     if (max_page_number === 0) {
       max_page_number = 1; // keep page_number above 0. otherwise when there's no product, page number become 0 and stays at 0
