@@ -90,9 +90,9 @@ const Wrapper = styled.section`
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
+    border: 0.5px solid var(--clr-grey-5);
     background: #222;
     margin-right: 0.5rem;
-    border: none;
     cursor: pointer;
     opacity: 0.5;
     display: flex;

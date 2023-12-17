@@ -1,20 +1,20 @@
 import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
-import heroBcg from "../assets/hero-bcg.jpeg";
-import heroBcg2 from "../assets/hero-bcg-2.jpeg";
+import heroBcg from "../assets/shoe-main.jpeg";
+// import heroBcg2 from "../assets/hero-bcg-2.jpeg";
 
 const Hero = () => {
   return (
     <Wrapper className="section-center">
       <article className="content">
         <h1>
-          design your <br /> comfort zone{" "}
+          Be in your <br /> comfort zone
         </h1>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolor ipsum
-          blanditiis iste saepe ad animi, rem, consequuntur, reiciendis
-          reprehenderit provident consequatur.
+          Discover comfort and style in every step. Our collection combines
+          fashion with function, ensuring both trendiness and ease. Step
+          confidently into your day with our carefully curated footwear.
         </p>
         <Link to="/products" className="btn hero-btn">
           SHop now
@@ -22,7 +22,7 @@ const Hero = () => {
       </article>
       <article className="img-container">
         <img src={heroBcg} alt="nice table" className="main-img" />
-        <img src={heroBcg2} alt="person working" className="accent-img" />
+        {/* <img src={heroBcg2} alt="person working" className="accent-img" /> */}
       </article>
     </Wrapper>
   );

@@ -38,8 +38,6 @@ exports.handler = async (event, context, cb) => {
       };
     });
 
-    console.log(products);
-
     return {
       statusCode: 200,
       body: JSON.stringify(products),
