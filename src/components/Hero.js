@@ -57,10 +57,6 @@ const Wrapper = styled.section`
       padding: 0.75rem 1.5rem;
       font-size: 1rem;
     }
-    .img-container {
-      display: block;
-      position: relative;
-    }
     .main-img {
       width: 100%;
       height: 550px;
@@ -68,6 +64,7 @@ const Wrapper = styled.section`
       border-radius: var(--radius);
       display: block;
       object-fit: cover;
+      z-index: 2;
     }
     .accent-img {
       position: absolute;
@@ -77,15 +74,68 @@ const Wrapper = styled.section`
       transform: translateX(-50%);
       border-radius: var(--radius);
     }
+    .img-container {
+      display: block;
+      position: relative;
+    }
+    @property --rotate {
+      syntax: "<angle>";
+      initial-value: 132deg;
+      inherits: false;
+    }
+
+    // .img-container::after {
+    //   content: "";
+    //   position: absolute;
+    //   inset: 0;
+    //   left: -1%;
+    //   width: 102%;
+    //   height: 100%;
+    //   scale: 1.03;
+    //   background-image: linear-gradient(var(--rotate), #5eead4, #ffa800);
+    //   border-radius: var(--radius);
+    //   animation: spin 2.5s linear infinite;
+    // }
+    // @keyframes spin {
+    //   0% {
+    //     --rotate: 0deg;
+    //   }
+    //   100% {
+    //     --rotate: 360deg;
+    //   }
+    // }
     .img-container::before {
-      content: "";
+      z-index: 3;
+      content: "Limited Edition Coming Soon";
       position: absolute;
-      width: 10%;
-      height: 80%;
-      background: var(--clr-primary-9);
-      bottom: 0%;
-      left: -8%;
-      border-radius: var(--radius);
+      width: 50%;
+      height: 15%;
+      background: var(--clr-fade);
+      color: white;
+      bottom: -3%;
+      left: -18%;
+      border-radius: var(--bradius);
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      // font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      font-size: 1.25rem;
+      letter-spacing: 1.2px;
+      font-weight: bold;
+      animation: blink 3.5s ease-in infinite;
+    }
+
+    @keyframes blink {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+      50% {
+        filter: hue-rotate(360deg);
+      }
+      100% {
+        filter: hue-rotate(0deg);
+      }
     }
   }
 `;
